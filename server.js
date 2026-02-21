@@ -1,16 +1,23 @@
 const express = require("express");
 const app = express();
+const PORT = process.env.PORT || 3000;
+
 app.use(express.json());
 
-let coins = { ris: 100 }; // временное хранилище монет
+let coins = 0; // здесь хранятся монетки в памяти сервера
 
-app.get("/coins/:user", (req, res) => res.json({ coins: coins[req.params.user] || 0 }));
-
-app.post("/coins/:user", (req, res) => {
-  const user = req.params.user;
-  const amount = Number(req.body.amount);
-  coins[user] = (coins[user] || 0) + amount;
-  res.json({ coins: coins[user] });
+// Получить количество монет
+app.get("/coins", (req, res) => {
+  res.json({ coins });
 });
 
-app.listen(3000, () => console.log("SERVER OK"));
+// Добавить монетки
+app.post("/coins", (req, res) => {
+  const amount = req.body.amount || 0;
+  coins += amount;
+  res.json({ coins });
+});
+
+app.listen(PORT, () => {
+  console.log("SERVER OK");
+});
