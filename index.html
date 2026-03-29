@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.H.A.D.E. SHD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header-main {
+            background: #fff;
+            border-bottom: 3px solid #000;
+            width: 100%;
+        }
+
+        .nav-link {
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid #900;
+            color: #900;
+        }
+
+        .content-box {
+            background: #fff;
+            border: 1px solid #ddd;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .scp-sidebar {
+            border-left: 4px solid #333;
+        }
+
+        .terminal-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .logo-container {
+            width: 40px;
+            height: 40px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            flex-shrink: 0;
+        }
+
+        .class-card {
+            border: 1px solid #eee;
+            padding: 1rem;
+            background: #fafafa;
+            border-left: 4px solid #ccc;
+        }
+
+        .class-s { border-left-color: #16a34a; }
+        .class-a { border-left-color: #ca8a04; }
+        .class-d { border-left-color: #dc2626; }
+
+        .fade-in {
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                gap: 1rem;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                justify-content: flex-start;
+            }
+            .content-box {
+                padding: 1.5rem !important;
+                border-left: none;
+                border-right: none;
+            }
+            .main-container {
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-main p-4 sm:p-6 sticky top-0 z-50">
+        <div class="max-w-full mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <div class="logo-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L4 5V11C4 16.1 7.4 20.8 12 22C16.6 20.8 20 16.1 20 11V5L12 2Z" stroke="white" stroke-width="2"/>
+                        <path d="M12 6V18" stroke="white" stroke-width="2"/>
+                        <path d="M8 12H16" stroke="white" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h1 class="text-xl sm:text-2xl font-bold tracking-tighter">S.H.A.D.E SHD</h1>
+            </div>
+            
+            <nav class="nav-container flex gap-6 w-full sm:w-auto justify-center">
+                <span onclick="tab('main')" id="t-main" class="nav-link active">Главное</span>
+                <span onclick="tab('sad')" id="t-sad" class="nav-link">S.A.D</span>
+                <span onclick="tab('exp')" id="t-exp" class="nav-link">Эксперименты</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-container flex-grow max-w-full w-full p-0 sm:p-6 md:p-10">
+        <div class="content-box p-6 sm:p-8 md:p-12 shadow-sm">
+            
+            <div id="v-main" class="fade-in">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 uppercase border-b-2 border-black pb-2">Главная директория</h2>
+                <div class="scp-sidebar pl-4 sm:pl-6 space-y-4">
+                    <p class="text-base sm:text-lg">Добро пожаловать в терминал управления <strong>S.H.A.D.E</strong>. Данный ресурс предназначен для координации действий сотрудников и мониторинга объектов.</p>
+                    <p class="text-xs sm:text-sm text-gray-600">Все действия в системе логируются. Несанкционированный доступ к разделам S.A.D карается в соответствии с регламентом безопасности.</p>
+                </div>
+            </div>
+
+            <div id="v-sad" class="fade-in hidden">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 uppercase border-b-2 border-black pb-2">Классификация S.A.D</h2>
+                <div class="grid gap-4 grid-cols-1">
+                    
+                    <div class="class-card class-s">
+                        <h3 class="font-bold text-green-700">Класс S (Safe)</h3>
+                        <p class="text-sm text-gray-700 mt-1">Объект является безопасным, и возле него можно безопасно находиться.</p>
+                    </div>
+
+                    <div class="class-card class-s">
+                        <h3 class="font-bold text-green-700">Класс S+</h3>
+                        <p class="text-sm text-gray-700 mt-1">Объект является безопасным, если его держать в камере.</p>
+                    </div>
+
+                    <div class="class-card class-s">
+                        <h3 class="font-bold text-green-700">Класс S++</h3>
+                        <p class="text-sm text-gray-700 mt-1">Объект является безопасным, если его не трогать и держать в камере.</p>
+                    </div>
+
+                    <div class="class-card class-a mt-2">
+                        <h3 class="font-bold text-yellow-700">Класс A (Active)</h3>
+                        <p class="text-sm text-gray-700 mt-1">Объект опасный, но требует камеру среднего уровня.</p>
+                    </div>
+
+                    <div class="class-card class-a">
+                        <h3 class="font-bold text-yellow-700">Класс A+</h3>
+                        <p class="text-sm text-gray-700 mt-1">Объект требует камеру среднего уровня и может совершить побег.</p>
+                    </div>
+
+                    <div class="class-card class-a">
+                        <h3 class="font-bold text-yellow-700">Класс A++</h3>
+                        <p class="text-sm text-gray-700 mt-1">Объект требует камеру среднего уровня и может навредить классу И самовольно.</p>
+                    </div>
+
+                    <div class="class-card class-d mt-2">
+                        <h3 class="font-bold text-red-700">Класс D (Danger)</h3>
+                        <p class="text-sm text-gray-700 mt-1">Требуется камера высокого уровня с герметичной дверью. Может навредить в любом случае, как только увидит класс И или сотрудника.</p>
+                    </div>
+
+                    <div class="class-card class-d">
+                        <h3 class="font-bold text-red-700">Класс D+</h3>
+                        <p class="text-sm text-gray-700 mt-1">Является опасным, может навредить или повредить камеру. Требуется большая камера с сенсорами и спец. оборудованием.</p>
+                    </div>
+
+                    <div class="class-card class-d">
+                        <h3 class="font-bold text-red-700">Класс D++</h3>
+                        <p class="text-sm text-gray-700 mt-1">Объект может сбежать или является крайне сильным. Требует герметичную дверь, камеру класса (5). Обычно имитируется обычная среда внутри камеры.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="v-exp" class="fade-in hidden">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 uppercase border-b-2 border-black pb-2">Архив экспериментов</h2>
+                <div class="scp-sidebar pl-4 sm:pl-6 space-y-4">
+                    <p class="text-gray-500 italic">На данный момент записи активных экспериментов не внесены в базу данных.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="w-full p-6 sm:p-10 text-center bg-gray-100 border-t border-gray-200 mt-auto">
+        <p class="terminal-font text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest">Security Level 4 // Authorization Required</p>
+    </footer>
+
+    <script>
+        function tab(name) {
+            document.querySelectorAll('[id^="v-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('v-' + name).classList.remove('hidden');
+            document.getElementById('t-' + name).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
